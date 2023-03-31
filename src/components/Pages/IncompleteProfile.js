@@ -2,6 +2,7 @@ import classes from "./IncompleteProfile.module.css";
 import React, { useContext, useEffect, useState } from "react";
 import { useRef } from "react";
 import LoginContext from "../Context/LoginContext";
+import Form from "../Layout/UI/Form";
 
 const IncompleteProfile = () => {
   const [displayNameValue, setDisplayNameValue] = useState("");
@@ -71,25 +72,36 @@ const IncompleteProfile = () => {
 
   return (
     <React.Fragment>
-      <h1>Profile Incomplete Page</h1>
-    <form className={classes.IncompleteProfile} >
-      <h3>Contact Details</h3>
-      <div>
-      <input
-          placeholder="Full Name"
-          input="text"
-          ref={fullNameRef}
-          defaultValue={displayNameValue}
-        />
-        <input
-          placeholder="Profile Photo URL"
-          input="text"
-          ref={photoRef}
-          defaultValue={photoUrlValue}
-        />
+         <div className={classes.mainProfile}>
+        <span className={classes.welcome}>
+          Winners never quit, Quitters never win...!!!
+        </span>
+        <span className={classes.profile}>
+          <span>
+            Your profile is <b>64%</b> completed. A complete profile has a
+            higher chance of landing a job.
+          </span>
+        </span>
       </div>
-      <button  type="Submit"  onClick={updateDetailsHandler}>Update Details</button>
-    </form>
+      <Form className={classes.form} onSubmit={updateDetailsHandler}>
+        <div className={classes.formHead}>
+          <span>Contact Details</span>
+          <button>Cancel</button>
+        </div>
+        <div className={classes.formBody}>
+          <label>Full Name:</label>
+          <input
+            type="text"
+            ref={fullNameRef}
+            defaultValue={displayNameValue}
+          />
+          <label>Profile Photo URL:</label>
+          <input type="text" ref={photoRef} defaultValue={photoUrlValue} />
+          <div className={classes.button}>
+            <button type="submit">Update</button>
+          </div>
+        </div>
+      </Form>
     </React.Fragment>
   );
 };
