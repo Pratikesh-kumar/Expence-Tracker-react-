@@ -2,10 +2,12 @@ import React,{useContext} from "react";
 import { Route, Redirect } from "react-router-dom";
 import SignUp from "./components/Pages/SignUp";
 import SignIn from "./components/Pages/SignIn";
-import LoginContext ,{ LoginContextProvider } from "./components/Context/LoginContext";
+import LoginContext from "./components/Context/LoginContext";
 import IncompleteProfile from "./components/Pages/IncompleteProfile";
 import ForgotPassword from "./components/Pages/ForgotPassword";
 import Expenses from './components/Pages/Expenses';
+import { ExpenseContextProvider } from "./components/Context/ExpenseContext";
+
 
 import Welcome from "./components/Pages/Welcome";
 import Header from './components/Layout/Header';
@@ -43,9 +45,11 @@ function App() {
         <Route path="/forgotPassword">
           <ForgotPassword />
         </Route>
+        <ExpenseContextProvider>
         <Route path="/expenses">
-        {isLoggedIn ? <Expenses /> : <Redirect to="/signIn" />}
-      </Route>
+          {isLoggedIn ? <Expenses /> : <Redirect to="/signIn" />}
+        </Route>
+      </ExpenseContextProvider>
 
 
      

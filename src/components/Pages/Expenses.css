@@ -8,3 +8,7 @@
   h2{
       text-align: center;
   }
+  button{
+    /* padding: 3rem; */
+    margin-top: 1rem;
+  }
