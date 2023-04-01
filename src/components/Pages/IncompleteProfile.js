@@ -72,36 +72,26 @@ const IncompleteProfile = () => {
 
   return (
     <React.Fragment>
-         <div className={classes.mainProfile}>
-        <span className={classes.welcome}>
-          Winners never quit, Quitters never win...!!!
-        </span>
-        <span className={classes.profile}>
-          <span>
-            Your profile is <b>64%</b> completed. A complete profile has a
-            higher chance of landing a job.
-          </span>
-        </span>
+          <Form onSubmit={updateDetailsHandler}>
+      <h3>Contact Details</h3>
+      <div>
+        <label>Update Your Profile Name</label>
+        <input
+          placeholder="Full Name"
+          input="text"
+          ref={fullNameRef}
+          defaultValue={displayNameValue}
+        />
+        <label>Update Your Photo</label>
+        <input
+          placeholder="Profile Photo URL"
+          input="text"
+          ref={photoRef}
+          defaultValue={photoUrlValue}
+        />
       </div>
-      <Form className={classes.form} onSubmit={updateDetailsHandler}>
-        <div className={classes.formHead}>
-          <span>Contact Details</span>
-          <button>Cancel</button>
-        </div>
-        <div className={classes.formBody}>
-          <label>Full Name:</label>
-          <input
-            type="text"
-            ref={fullNameRef}
-            defaultValue={displayNameValue}
-          />
-          <label>Profile Photo URL:</label>
-          <input type="text" ref={photoRef} defaultValue={photoUrlValue} />
-          <div className={classes.button}>
-            <button type="submit">Update</button>
-          </div>
-        </div>
-      </Form>
+      <button>Update Details</button>
+    </Form>
     </React.Fragment>
   );
 };
