@@ -1,8 +1,9 @@
 import classes from "./IncompleteProfile.module.css";
-import React, { useContext, useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import { useRef } from "react";
-import LoginContext from "../Context/LoginContext";
-import Form from "../Layout/UI/Form";
+import { useSelector } from "react-redux";
+import Form from "../../Layout/UI/Form";
+import Button from "../../Layout/UI/Button";
 
 const IncompleteProfile = () => {
   const [displayNameValue, setDisplayNameValue] = useState("");
@@ -10,7 +11,8 @@ const IncompleteProfile = () => {
   const fullNameRef = useRef("");
   const photoRef = useRef("");
 
-  const loginCtx = useContext(LoginContext);
+  const idToken = useSelector((state) => state.auth.idToken);
+
 
   const updateDetailsHandler = async (event) => {
     event.preventDefault();
@@ -22,7 +24,7 @@ const IncompleteProfile = () => {
       {
         method: "POST",
         body: JSON.stringify({
-          idToken: loginCtx.idToken,
+          idToken: idToken,
           displayName: fullName,
           photoUrl: photoUrl,
           returnSecureToken: true,
@@ -51,7 +53,7 @@ const IncompleteProfile = () => {
         {
           method: "POST",
           body: JSON.stringify({
-            idToken: loginCtx.idToken,
+            idToken:idToken,
           }),
           headers: {
             "Content-Type": "application/json",
@@ -90,7 +92,7 @@ const IncompleteProfile = () => {
           defaultValue={photoUrlValue}
         />
       </div>
-      <button>Update Details</button>
+      <Button>Update Details</Button>
     </Form>
     </React.Fragment>
   );

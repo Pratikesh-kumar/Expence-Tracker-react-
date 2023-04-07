@@ -1,18 +1,20 @@
-import React,{useContext} from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import classes from "./Welcome.module.css"
+import { useSelector } from "react-redux";
 
-import LoginContext from "../Context/LoginContext";
+
 
 const Welcome = () => {
-    const loginCtx = useContext(LoginContext);
+  const idToken = useSelector((state) => state.auth.idToken);
+    
     const verifyEmailHandler = async () => {
       const response = await fetch(
         "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDB1MT0G7F1tJ6fr81fLMNyQfJMMc88rE8",
         {
           method: "POST",
           body: JSON.stringify({
-            idToken: loginCtx.idToken,
+            idToken: idToken,
             requestType: "VERIFY_EMAIL",
           }),
           headers: {
@@ -34,10 +36,10 @@ const Welcome = () => {
         Your Profile is incomplete.
         <Link to="/incompleteProfile"> Complete Profile</Link>
       </p>
-      <button  className={classes.button}
-              onClick={verifyEmailHandler}>
-                Verify Email
-                </button>
+      <button  
+         onClick={verifyEmailHandler}>
+             Verify Email
+          </button>
     </div>
   );
 };

@@ -1,16 +1,21 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useRef } from "react";
-import { useHistory,Link } from "react-router-dom";
-import LoginContext from "../Context/LoginContext";
+import { useHistory, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AuthActions } from "../../store/AuthReducer";
+
 import classes from "./SignIn.module.css";
-import Form from "../Layout/UI/Form";
+import Form from "../../Layout/UI/Form";
+import Button from "../../Layout/UI/Button";
+
+
 const SignIn = () => {
   const emailRef = useRef("");
   const pswdRef = useRef("");
 
   const history = useHistory("");
 
-  const loginCtx = useContext(LoginContext);
+  const dispatch = useDispatch();
 
   const signInSubmitHandler = async (event) => {
     event.preventDefault();
@@ -41,36 +46,36 @@ const SignIn = () => {
       emailRef.current.value = "";
       pswdRef.current.value = "";
 
-      loginCtx.login(data.email, data.idToken);
+      dispatch(AuthActions.login({ email: data.email, idToken: data.idToken }));
 
-      // history.replace("/welcome");
-      history.replace("/expenses");
+      history.replace("/welcome");
+      // history.replace("/expenses");
     } else {
       alert(data.error.message);
     }
   };
   return (
     <Form onSubmit={signInSubmitHandler} className={classes.signIn}>
-    <div>
-      <h3>Sign In</h3>
-    </div>
-    <div>
-      <input
-        id="emailId"
-        placeholder="Email"
-        type="text"
-        ref={emailRef}
-      ></input>
-      <input
-        id="passwordId"
-        placeholder="Password"
-        type="password"
-        ref={pswdRef}
-      />
-    </div>
-    <button>Sign In</button>
-    <Link to="/forgotPassword">Forgot Password?</Link>
-  </Form>
-);
+      <div>
+        <h3>Sign In</h3>
+      </div>
+      <div>
+        <input
+          id="emailId"
+          placeholder="Email"
+          type="text"
+          ref={emailRef}
+        ></input>
+        <input
+          id="passwordId"
+          placeholder="Password"
+          type="password"
+          ref={pswdRef}
+        />
+      </div>
+      <Button>Sign In</Button>
+      <Link to="/forgotPassword">Forgot Password?</Link>
+    </Form>
+  );
 };
 export default SignIn;

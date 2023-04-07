@@ -1,5 +1,6 @@
 import { useRef,useState } from "react";
-import Form from "../Layout/UI/Form";
+import Form from "../../Layout/UI/Form";
+import Button from "../../Layout/UI/Button";
 
 
 const ForgotPassword = () => {
@@ -38,7 +39,7 @@ const ForgotPassword = () => {
           placeholder="Email"
           ref={forgotEmailRef}
         ></input>
-        <button>Send Link</button>
+        <Button>Send Link</Button>
         {!!successMessage && <h4>{successMessage}</h4>}
       </Form>
   );
